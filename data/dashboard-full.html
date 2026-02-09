@@ -1,1 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - TravL E-sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/contrast.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="logo-icon">🎮</div>
+                <div class="logo-title">TravL</div>
+            </div>
+            <div class="logo-subtitle">Admin Dashboard</div>
+        </div>
 
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-section="teams">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Équipes</span>
+            </a>
+            <a href="#" class="nav-item" data-section="players">
+                <span class="nav-icon">🏆</span>
+                <span class="nav-label">Joueurs</span>
+            </a>
+            <a href="#" class="nav-item" data-section="matches">
+                <span class="nav-icon">⚔️</span>
+                <span class="nav-label">Matchs</span>
+            </a>
+            <a href="#" class="nav-item" data-section="planning">
+                <span class="nav-icon">📅</span>
+                <span class="nav-label">Planning</span>
+            </a>
+            <a href="#" class="nav-item" data-section="budget">
+                <span class="nav-icon">💰</span>
+                <span class="nav-label">Budget</span>
+            </a>
+            <a href="#" class="nav-item" data-section="analytics">
+                <span class="nav-icon">📈</span>
+                <span class="nav-label">Analytics</span>
+            </a>
+            <a href="#" class="nav-item" data-section="news">
+                <span class="nav-icon">📰</span>
+                <span class="nav-label">News</span>
+            </a>
+            <a href="#" class="nav-item" data-section="sponsors">
+                <span class="nav-icon">🤝</span>
+                <span class="nav-label">Sponsors</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- DASHBOARD SECTION -->
+        <div class="section-content active" id="dashboard">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                    <p>Vue d'ensemble TravL E-sports</p>
+                </div>
+                <div class="top-actions">
+                    <a href="index.html" class="btn btn-secondary">← Site Public</a>
+                </div>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-card" id="stat-teams">
+                    <div class="stat-header">
+                        <span class="stat-label">Équipes Actives</span>
+                        <div class="stat-icon">👥</div>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-trend"><span>↗</span> <span>+2 ce mois</span></div>
+                </div>
+
+                <div class="stat-card" id="stat-players">
+                    <div class="stat-header">
+                        <span class="stat-label">Joueurs Total</span>
+                        <div class="stat-icon">🏆</div>
+                    </div>
+                    <div class="stat-value">40</div>
+                    <div class="stat-trend"><span>↗</span> <span>+3 ce mois</span></div>
+                </div>
+
+                <div class="stat-card" id="stat-matches">
+                    <div class="stat-header">
+                        <span class="stat-label">Matchs ce Mois</span>
+                        <div class="stat-icon">⚔️</div>
+                    </div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-trend"><span>↗</span> <span>+18.2%</span></div>
+                </div>
+
+                <div class="stat-card" id="stat-winrate">
+                    <div class="stat-header">
+                        <span class="stat-label">Winrate Global</span>
+                        <div class="stat-icon">📊</div>
+                    </div>
+                    <div class="stat-value">58%</div>
+                    <div class="stat-trend trend-negative"><span>↘</span> <span>-2.1%</span></div>
+                </div>
+
+                <div class="stat-card" id="stat-budget">
+                    <div class="stat-header">
+                        <span class="stat-label">Budget Mensuel</span>
+                        <div class="stat-icon">💰</div>
+                    </div>
+                    <div class="stat-value">58K€</div>
+                    <div class="stat-trend"><span>→</span> <span>Stable</span></div>
+                </div>
+
+                <div class="stat-card" id="stat-lan">
+                    <div class="stat-header">
+                        <span class="stat-label">LAN à Venir</span>
+                        <div class="stat-icon">🎮</div>
+                    </div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-trend"><span>↗</span> <span>Ce trimestre</span></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Activité Récente</h2>
+                </div>
+                <table class="data-table" id="recent-activity">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Équipe</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TEAMS SECTION -->
+        <div class="section-content" id="teams">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Gestion des Équipes</h1>
+                    <p>Gérez vos 8 équipes League of Legends</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Liste des Équipes</h2>
+                </div>
+                <table class="data-table" id="teams-table">
+                    <thead>
+                        <tr>
+                            <th>Équipe</th>
+                            <th>Division</th>
+                            <th>Victoires</th>
+                            <th>Défaites</th>
+                            <th>Winrate</th>
+                            <th>Joueurs</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PLAYERS SECTION -->
+        <div class="section-content" id="players">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Gestion des Joueurs</h1>
+                    <p>Base de données des 40 joueurs</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Liste des Joueurs</h2>
+                </div>
+                <table class="data-table" id="players-table">
+                    <thead>
+                        <tr>
+                            <th>Pseudo</th>
+                            <th>Équipe</th>
+                            <th>Position</th>
+                            <th>KDA</th>
+                            <th>Winrate</th>
+                            <th>Contrat</th>
+                            <th>Rôle</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- MATCHES SECTION -->
+        <div class="section-content" id="matches">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Gestion des Matchs</h1>
+                    <p>Calendrier et résultats</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Matchs À Venir</h2>
+                </div>
+                <table class="data-table" id="upcoming-matches">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Heure</th>
+                            <th>Notre Équipe</th>
+                            <th>Adversaire</th>
+                            <th>Tournoi</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Matchs Terminés</h2>
+                </div>
+                <table class="data-table" id="completed-matches">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Notre Équipe</th>
+                            <th>Adversaire</th>
+                            <th>Score</th>
+                            <th>Résultat</th>
+                            <th>Tournoi</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PLANNING SECTION -->
+        <div class="section-content" id="planning">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Planning & Sessions</h1>
+                    <p>Calendrier interactif des entraînements</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Calendrier Mensuel</h2>
+                </div>
+                <div class="calendar" id="calendar"></div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Sessions à Venir</h2>
+                </div>
+                <div id="upcoming-sessions"></div>
+            </div>
+        </div>
+
+        <!-- BUDGET SECTION -->
+        <div class="section-content" id="budget">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Gestion du Budget</h1>
+                    <p>Finances de l'organisation</p>
+                </div>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-card" id="budget-total">
+                    <div class="stat-header">
+                        <span class="stat-label">Budget Total 2026</span>
+                        <div class="stat-icon">💰</div>
+                    </div>
+                    <div class="stat-value">2.4M€</div>
+                    <div class="stat-trend"><span>↗</span> <span>+12% vs 2025</span></div>
+                </div>
+
+                <div class="stat-card" id="budget-revenue">
+                    <div class="stat-header">
+                        <span class="stat-label">Revenus Mensuels</span>
+                        <div class="stat-icon">📈</div>
+                    </div>
+                    <div class="stat-value">258K€</div>
+                    <div class="stat-trend"><span>↗</span> <span>+8.5%</span></div>
+                </div>
+
+                <div class="stat-card" id="budget-expenses">
+                    <div class="stat-header">
+                        <span class="stat-label">Dépenses Mensuelles</span>
+                        <div class="stat-icon">💸</div>
+                    </div>
+                    <div class="stat-value">200K€</div>
+                    <div class="stat-trend trend-negative"><span>↗</span> <span>+5.2%</span></div>
+                </div>
+
+                <div class="stat-card" id="budget-profit">
+                    <div class="stat-header">
+                        <span class="stat-label">Bénéfice Net</span>
+                        <div class="stat-icon">✅</div>
+                    </div>
+                    <div class="stat-value">58K€</div>
+                    <div class="stat-trend"><span>↗</span> <span>+15.3%</span></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Transactions Récentes</h2>
+                </div>
+                <table class="data-table" id="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Catégorie</th>
+                            <th>Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ANALYTICS SECTION -->
+        <div class="section-content" id="analytics">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Analytics & Performance</h1>
+                    <p>Statistiques avancées</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Performance par Équipe</h2>
+                </div>
+                <canvas id="team-performance-chart" width="800" height="300"></canvas>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Évolution Winrate</h2>
+                </div>
+                <canvas id="winrate-chart" width="800" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- NEWS SECTION -->
+        <div class="section-content" id="news">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Gestion des News</h1>
+                    <p>Publiez et gérez les actualités</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Articles Publiés</h2>
+                </div>
+                <table class="data-table" id="news-table">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Catégorie</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SPONSORS SECTION -->
+        <div class="section-content" id="sponsors">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1>Gestion des Sponsors</h1>
+                    <p>Partenaires et sponsorships</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Liste des Sponsors</h2>
+                </div>
+                <table class="data-table" id="sponsors-table">
+                    <thead>
+                        <tr>
+                            <th>Sponsor</th>
+                            <th>Type</th>
+                            <th>Montant Annuel</th>
+                            <th>Début</th>
+                            <th>Fin</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="./data/database.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
