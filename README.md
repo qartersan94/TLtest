@@ -1,202 +1,136 @@
-# 🎮 TravL E-sports - Site Ultra-Dark Futuriste
+## 🎮 TravL E-sports - Site Ultra-Dark
 
-## 🎨 Design Principles
-
-### ✅ Ce qui a été fait :
-- **Ultra-dark background** : Noir pur (#000000)
-- **NO GOLD** : Suppression totale de l'or
-- **Accent rouge vif** : #ff0844 uniquement
-- **Cartes compactes** : Toutes les cartes sont petites, épurées
-- **Style futuriste** : Effets de glow, animations subtiles
-- **Pro e-sports** : Design minimaliste et fonctionnel
-
-### 🚫 Ce qui a été retiré :
-- ❌ Couleur OR (complètement supprimée)
-- ❌ Texte pré-rempli (tout vide ou minimal)
-- ❌ Pages de présentation longues
-- ❌ Design "corporate" 
-- ❌ Layouts complexes
+## ✅ Version Finale - Tous les fichiers cohérents
 
 ---
 
-## 📁 Nouveaux Fichiers
+## 📁 Structure
 
-### 🎨 CSS
-1. **`css/dark-theme.css`** (NOUVEAU - Principal)
-   - Ultra-dark colors
-   - Cards compactes
-   - Effets futuristes
-   - Responsive design
-
-2. **`css/futuristic.css`** (Optionnel - Alternative)
-   - Variante encore plus futuriste
-
-### 🌐 HTML
-1. **`index.html`** (REFAIT À NEUF)
-   - Bannière top avec tabs: Rosters | Actualités | Profils | Stats | Planning
-   - Design ultra-compact
-   - Cartes petites et stylées
-   - Vide par défaut (prêt à remplir)
-
-2. **`dashboard.html`** (NOUVEAU - Plus simple)
-   - Sidebar gauche
-   - 8 sections: Overview, Équipes, Joueurs, Matchs, Planning, Recrutement, Budget, News
-   - Tables épurées
-   - Actions rapides
-
----
-
-## 🎯 Navigation
-
-### Page Publique (`index.html`)
-
-**Top Banner** avec 5 tabs :
-- 📋 **Rosters** : Cartes des équipes (vides par défaut)
-- 📰 **Actualités** : News en cartes (vide)
-- 👤 **Profils** : Joueurs avec recherche
-- 📊 **Stats** : Statistiques globales
-- 📅 **Planning** : Calendrier (vide, prêt à remplir)
-
-**Boutons dans la bannière** :
-- `Recrutement` (lien vers recruitment.html)
-- `Admin` (lien vers dashboard.html)
-
-### Dashboard Admin (`dashboard.html`)
-
-**Sidebar** avec 8 sections :
-1. 📊 Vue d'ensemble (stats)
-2. 🏆 Équipes (tableau CRUD)
-3. 👤 Joueurs (tableau CRUD)
-4. ⚔️ Matchs
-5. 📅 Planning
-6. 🎯 Recrutement
-7. 💰 Budget
-8. 📰 News
-
----
-
-## 🎨 Palette de Couleurs
-
-```css
-/* Ultra Dark */
---bg-primary: #000000       /* Noir pur */
---bg-secondary: #0a0a0a     /* Noir légèrement gris */
---bg-card: #0f0f0f          /* Cards */
---bg-hover: #151515         /* Hover state */
-
-/* Accent Rouge UNIQUEMENT */
---accent-red: #ff0844       /* Rouge vif */
---accent-red-dark: #cc0036  /* Rouge foncé */
---accent-red-glow: rgba(255, 8, 68, 0.4)  /* Glow effect */
-
-/* Texte */
---text-primary: #ffffff     /* Blanc */
---text-secondary: #a0a0a0   /* Gris clair */
---text-tertiary: #606060    /* Gris foncé */
-
-/* Borders */
---border-primary: #1a1a1a
---border-accent: #2a2a2a
-
-/* Status */
---color-success: #00ff88    /* Vert néon */
---color-warning: #ffa500    /* Orange */
---color-info: #00d4ff       /* Cyan */
+```
+travl-esports/
+├── index.html           ⭐ Page principale (ULTRA-DARK)
+├── dashboard.html       ⭐ Admin dashboard (ULTRA-DARK)
+├── recruitment.html     ⭐ Page recrutement (ULTRA-DARK)
+├── data/
+│   └── database.js      📊 Base de données (8 équipes, 40 joueurs)
+├── css/
+│   └── (fichiers legacy - CSS maintenant intégré dans HTML)
+└── js/
+    └── (fichiers legacy - fonctions dans HTML)
 ```
 
 ---
 
-## 🎴 Composants
+## 🎨 Design
 
-### Card Standard
-```html
-<div class="card">
-  <!-- Content -->
-</div>
+### Ultra-Dark Theme
+- ✅ Fond noir pur `#000000`
+- ✅ Accent rouge vif `#ff0844`
+- ✅ **PAS D'OR** (supprimé complètement)
+- ✅ Cartes compactes
+- ✅ Style e-sports futuriste
+- ✅ CSS intégré (pas de dépendances externes)
+
+### Palette
 ```
-- Background ultra-dark
-- Border fine
-- Hover : glow rouge + translateY
-- Compact padding
-
-### Team Card
-```html
-<div class="team-card">
-  <div class="team-header">
-    <div class="team-icon">🔥</div>
-    <div class="team-name">TravL RoZ</div>
-  </div>
-  <div class="team-stats">
-    <!-- W/L/WR -->
-  </div>
-</div>
-```
-
-### Player Card
-```html
-<div class="player-card">
-  <div class="player-avatar">DR</div>
-  <div class="player-name">DragonSlayer</div>
-  <div class="player-stats">
-    <!-- KDA/WR/Age -->
-  </div>
-</div>
-```
-
-### Stat Card
-```html
-<div class="stat-card">
-  <div class="stat-label">Total Équipes</div>
-  <div class="stat-value">8</div>
-</div>
+Noir pur:     #000000
+Card:         #0f0f0f
+Rouge:        #ff0844
+Texte:        #ffffff
+Secondaire:   #a0a0a0
 ```
 
 ---
 
-## ⚡ Fonctionnalités
+## 🚀 Pages
 
-### ✅ Actuellement Fonctionnel
+### 1. **index.html** (Page Principale)
 
-**Page Publique** :
-- [x] Navigation par tabs
-- [x] Affichage rosters (depuis DATABASE)
-- [x] Affichage profils joueurs
-- [x] Recherche joueurs
-- [x] Stats globales
-- [x] Sections vides (prêtes à remplir)
+**Bannière Top** :
+- Logo TRAVL (rouge néon)
+- Tabs : Rosters | Actualités | Profils | Stats | Planning
+- Boutons : Recrutement | Admin
 
-**Dashboard Admin** :
-- [x] Navigation sidebar
-- [x] Tableau équipes (CRUD ready)
-- [x] Tableau joueurs (CRUD ready)
-- [x] Stats dashboard
-- [x] Boutons d'action
+**Sections** :
+- ✅ **Rosters** : Cartes des 8 équipes
+- 🔲 **Actualités** : Vide (prêt à remplir)
+- ✅ **Profils** : 40 joueurs + recherche
+- ✅ **Stats** : Dashboard stats
+- 🔲 **Planning** : Vide (structure prête)
 
-### 🔲 À Implémenter (Vides exprès)
-
-- [ ] Formulaires d'ajout (équipes, joueurs, news)
-- [ ] Modales détails
-- [ ] Calendrier planning interactif
-- [ ] Graphiques stats
-- [ ] Upload images
-- [ ] Gestion budget détaillée
+**Fonctionnalités** :
+- Navigation par tabs
+- Recherche joueurs en temps réel
+- Hover effects (glow rouge)
+- Animations smooth
 
 ---
 
-## 🚀 Utilisation
+### 2. **dashboard.html** (Admin)
 
-### 1. Ouvrir le site
-```bash
-# Page publique
-open index.html
+**Sidebar** :
+- Vue d'ensemble
+- Équipes (tableau CRUD)
+- Joueurs (tableau CRUD)
+- Matchs
+- Planning
+- Recrutement
+- Budget
+- News
 
-# Dashboard admin
-open dashboard.html
-```
+**Fonctionnalités** :
+- Navigation sidebar
+- Tables interactives
+- Stats en temps réel
+- Boutons d'action (alerts pour l'instant)
 
-### 2. Ajouter du contenu
+---
 
-Les données viennent de `data/database.js` :
+### 3. **recruitment.html** (Recrutement)
+
+**2 Tabs** :
+- **Offres** : Cartes des postes ouverts
+- **Postuler** : Formulaire complet
+
+**Formulaire** :
+- Pseudo, âge, email, discord
+- Position (TOP/JGL/MID/ADC/SUP)
+- 31 rangs (Fer → Challenger)
+- Disponibilités (7 jours)
+- Motivation (500 char max)
+
+---
+
+## 🎯 Équipes (TravL)
+
+1. **RoZ** 🔥 - Principale
+2. **Mount X** ⛰️ - Académie
+3. **Flux** ⚡ - Espoirs
+4. **Froznlégion** ❄️ - Développement
+5. **Visionary** 👁️ - Talents
+6. **Mymétic** 🎭 - Challenger
+7. **Heav'n** ☁️ - Formation
+8. **Légendary** 👑 - Réserve
+
+**Total** : 40 joueurs dans database.js
+
+---
+
+## 📊 Base de Données
+
+### `data/database.js`
+
+Contient :
+- ✅ 8 équipes (avec stats W/L/WR)
+- ✅ 40 joueurs (pseudo, KDA, winrate, position, etc.)
+- ✅ 8 coaches
+- ✅ 8 managers
+- ✅ Matchs
+- ✅ Sessions d'entraînement
+- ✅ 31 rangs LoL
+- ✅ Candidatures (système recrutement)
+
+**Exemple** :
 ```javascript
 DATABASE = {
   teams: [
@@ -214,98 +148,112 @@ DATABASE = {
 }
 ```
 
-### 3. Personnaliser
+---
 
-**Couleurs** : Modifiez `css/dark-theme.css` (variables CSS)
-**Composants** : Dupliquez les cards existantes
-**Sections** : Ajoutez dans les tabs/sidebar
+## ⚡ Utilisation
+
+### 1. Ouvrir le site
+```bash
+# Double-cliquer sur index.html
+# ou
+open index.html
+```
+
+### 2. Navigation
+- **Site public** : `index.html`
+- **Admin** : Cliquer "ADMIN" → `dashboard.html`
+- **Recrutement** : Cliquer "RECRUTEMENT" → `recruitment.html`
+
+### 3. Modifier les données
+Éditez `data/database.js` :
+- Ajouter/modifier équipes
+- Ajouter/modifier joueurs
+- Changer les stats
+
+### 4. Personnaliser les couleurs
+Toutes les couleurs sont dans les variables CSS en haut de chaque HTML :
+```css
+:root {
+  --accent-red: #ff0844;  /* Changer ici */
+  --bg-primary: #000000;  /* Fond */
+  ...
+}
+```
 
 ---
 
-## 📊 État des Sections
+## 🔧 À Implémenter
 
-| Section | État | Description |
-|---------|------|-------------|
-| Rosters | ✅ Prêt | Cartes équipes depuis DB |
-| Actualités | 🔲 Vide | Prêt à remplir |
-| Profils | ✅ Prêt | Cards joueurs + recherche |
-| Stats | ✅ Prêt | Calculs automatiques |
-| Planning | 🔲 Vide | Structure prête |
-| Recrutement | ✅ Prêt | Lien vers page dédiée |
+### Prêt mais vide (click = alert) :
+- [ ] Formulaire ajout équipe
+- [ ] Formulaire ajout joueur
+- [ ] Formulaire ajout news
+- [ ] Modales détails (profils, équipes)
+- [ ] Calendrier interactif
+- [ ] Graphiques stats avancés
+- [ ] Upload images
 
----
-
-## 🎯 Prochaines Étapes
-
-### Phase 1 : Contenu
-1. Remplir les actualités
-2. Ajouter photos joueurs
-3. Compléter les stats
-
-### Phase 2 : Interactions
-1. Modales détails (équipes, joueurs)
-2. Formulaires d'ajout
-3. Calendrier interactif
-
-### Phase 3 : Backend
-1. API pour sauvegarder
-2. Base de données réelle
-3. Authentification
-
----
-
-## 🎨 Caractéristiques Visuelles
-
-### Effets
-- ✨ **Glow rouge** sur hover
-- 🎯 **Animations subtiles** (fadeIn, translateY)
-- 🌟 **Borders animées** (top gradient)
-- 💫 **Shadows dynamiques**
-
-### Typography
-- **Titres** : Teko (futuriste)
-- **Texte** : Rajdhani (lisible)
-- **Uppercase** pour les labels
-- **Letter-spacing** pour l'effet tech
-
-### Layout
-- **Max-width** : 1800px
-- **Grid** : Auto-fill responsive
-- **Gap** : 1rem (compact)
-- **Padding** : 1rem (minimal)
+### Backend (futur) :
+- [ ] API REST
+- [ ] Base de données réelle
+- [ ] Authentification
+- [ ] Système de fichiers
 
 ---
 
 ## 📱 Responsive
 
-- ✅ Desktop (1920px+)
-- ✅ Laptop (1366px)
-- ✅ Tablet (768px)
-- ✅ Mobile (375px)
+✅ Desktop (1920px+)
+✅ Laptop (1366px)
+✅ Tablet (768px)
+✅ Mobile (375px)
 
-**Mobile** : Grid devient 1 colonne, tabs compacts
+---
+
+## 🎨 Effets Visuels
+
+- **Glow rouge** sur hover
+- **Animations** fadeIn, translateY
+- **Borders** animées (top gradient)
+- **Shadows** dynamiques
+- **Transitions** smooth (0.3s)
 
 ---
 
 ## ⚠️ Important
 
-### Ce qui est VIDE par défaut :
-- Actualités (prêt à ajouter)
-- Planning (structure prête)
-- Matchs détails
-- Budget transactions
-- Formulaires (boutons présents, actions à coder)
+### CSS Intégré
+Le CSS est **directement dans les fichiers HTML** (balise `<style>`).
+Pas de dépendances externes = **Fonctionne toujours**.
 
-### Ce qui FONCTIONNE :
-- Affichage rosters
-- Affichage profils
-- Navigation
-- Recherche
-- Stats calculs
-- Design complet
+### JavaScript Minimal
+Tout le JS essentiel est dans les `<script>` des HTML.
+`database.js` est le seul fichier externe requis.
+
+### Compatibilité
+- ✅ Chrome, Firefox, Edge, Safari
+- ✅ Pas de frameworks (Vanilla JS)
+- ✅ Pas de build required
 
 ---
 
-**Design créé pour TravL E-sports** 🎮
-Version 2.0 - Ultra-Dark Futuristic
+## 📝 Notes
+
+### Ce qui fonctionne :
+✅ Navigation complète
+✅ Affichage données depuis DATABASE
+✅ Recherche joueurs
+✅ Stats calculées
+✅ Design ultra-dark
+✅ Responsive
+
+### Ce qui est vide (intentionnel) :
+🔲 Actualités (ajoutez dans dashboard)
+🔲 Planning (calendrier à coder)
+🔲 Formulaires CRUD (alerts pour l'instant)
+
+---
+
+**🎮 TravL E-sports**
+Version Ultra-Dark Finale
 Février 2026
