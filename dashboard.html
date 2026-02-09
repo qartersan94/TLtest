@@ -3,1366 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin - TravL E-sports</title>
+    <title>Dashboard Admin - TravL</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/dark-theme.css">
     <style>
-        :root {
-            --primary-red: #D31027;
-            --deep-red: #8B0000;
-            --dark-red: #5C0000;
-            --black: #000000;
-            --dark-gray: #0a0a0a;
-            --darker-gray: #050505;
-            --gold: #FFD700;
-            --text-light: #E8EAF0;
-            --text-gray: #9BA3B4;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--black);
-            color: var(--text-light);
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
         .sidebar {
-            width: 260px;
-            background: linear-gradient(180deg, rgba(10, 10, 10, 0.98), rgba(139, 0, 0, 0.15));
-            border-right: 2px solid var(--deep-red);
-            padding: 2rem 0;
             position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
             height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-primary);
+            padding: 2rem 0;
             overflow-y: auto;
         }
 
-        .sidebar-header {
-            padding: 0 1.5rem 2rem;
-            border-bottom: 1px solid rgba(211, 16, 39, 0.3);
-        }
-
         .sidebar-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.5rem;
+            padding: 0 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-primary);
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+        .sidebar-logo .logo {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
         }
 
-        .logo-title {
-            font-family: 'Teko', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-red), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo-subtitle {
+        .sidebar-subtitle {
             font-size: 0.75rem;
-            color: var(--text-gray);
+            color: var(--text-tertiary);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-left: 48px;
+            letter-spacing: 2px;
         }
 
         .sidebar-nav {
             padding: 1.5rem 0;
         }
 
-        .nav-item {
+        .sidebar-item {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            padding: 0.9rem 1.5rem;
-            color: var(--text-gray);
+            gap: 1rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
             text-decoration: none;
             transition: all 0.3s;
             cursor: pointer;
             border-left: 3px solid transparent;
         }
 
-        .nav-item:hover,
-        .nav-item.active {
-            background: rgba(211, 16, 39, 0.1);
-            color: var(--text-light);
-            border-left-color: var(--primary-red);
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background: rgba(255, 8, 68, 0.1);
+            color: var(--text-primary);
+            border-left-color: var(--accent-red);
         }
 
-        .nav-icon {
+        .sidebar-icon {
             font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
         }
 
-        .nav-label {
-            font-weight: 600;
-            font-size: 0.95rem;
+        .main-dashboard {
+            margin-left: 250px;
+            padding: 2rem;
         }
 
-        .sidebar-footer {
-            padding: 1.5rem;
-            border-top: 1px solid rgba(211, 16, 39, 0.3);
-            margin-top: auto;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-
-        .user-details {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .user-role {
-            font-size: 0.75rem;
-            color: var(--gold);
-            text-transform: uppercase;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 260px;
-            flex: 1;
-            padding: 2rem 3rem;
-        }
-
-        .top-bar {
+        .dashboard-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(211, 16, 39, 0.3);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-primary);
         }
 
-        .page-title h1 {
-            font-family: 'Teko', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-red), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .page-title p {
-            color: var(--text-gray);
-            margin-top: 0.3rem;
-        }
-
-        .top-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.7rem 1.5rem;
-            border: none;
+        .table {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
             border-radius: 8px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
-            color: white;
-            box-shadow: 0 4px 15px rgba(211, 16, 39, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(211, 16, 39, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-light);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary-red);
-        }
-
-        /* Dashboard Grid */
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(139, 0, 0, 0.15));
-            border: 1px solid rgba(211, 16, 39, 0.3);
-            border-radius: 12px;
-            padding: 1.8rem;
-            transition: all 0.3s;
-            position: relative;
             overflow: hidden;
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(211, 16, 39, 0.1), transparent);
-            border-radius: 0 0 0 100%;
+        .table thead {
+            background: rgba(255, 8, 68, 0.05);
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-red);
-            box-shadow: 0 15px 35px rgba(211, 16, 39, 0.3);
-        }
-
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .stat-value {
-            font-family: 'Teko', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-trend {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--success);
-        }
-
-        .trend-negative {
-            color: var(--primary-red);
-        }
-
-        /* Content Section */
-        .content-section {
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(139, 0, 0, 0.1));
-            border: 1px solid rgba(211, 16, 39, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(211, 16, 39, 0.2);
-        }
-
-        .section-title {
-            font-family: 'Teko', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-light);
-        }
-
-        /* Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .data-table thead th {
-            text-align: left;
+        .table th {
             padding: 1rem;
-            background: rgba(211, 16, 39, 0.1);
-            color: var(--text-light);
+            text-align: left;
             font-weight: 600;
-            text-transform: uppercase;
             font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
             letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-primary);
         }
 
-        .data-table tbody td {
-            padding: 1.2rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-gray);
+        .table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-primary);
+            color: var(--text-primary);
         }
 
-        .data-table tbody tr:hover {
-            background: rgba(211, 16, 39, 0.05);
+        .table tr:last-child td {
+            border-bottom: none;
         }
 
-        .table-actions {
-            display: flex;
-            gap: 0.5rem;
+        .table tr:hover {
+            background: rgba(255, 8, 68, 0.05);
         }
 
         .action-btn {
             padding: 0.4rem 0.8rem;
             border: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-        }
-
-        .action-edit {
-            background: var(--info);
-            color: white;
-        }
-
-        .action-delete {
-            background: var(--primary-red);
-            color: white;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Form */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-            padding: 0.8rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: var(--text-light);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Badge */
-        .badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .badge-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .badge-warning {
-            background: var(--warning);
-            color: white;
-        }
-
-        .badge-danger {
-            background: var(--primary-red);
-            color: white;
-        }
-
-        .badge-info {
-            background: var(--info);
-            color: white;
-        }
-
-        /* Charts Placeholder */
-        .chart-container {
-            height: 300px;
-            background: rgba(211, 16, 39, 0.05);
-            border: 1px solid rgba(211, 16, 39, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-gray);
-            font-family: 'Teko', sans-serif;
-            font-size: 1.5rem;
-        }
-
-        /* Hidden sections */
-        .section-content {
-            display: none;
-        }
-
-        .section-content.active {
-            display: block;
-        }
-
-        /* Status Indicator */
-        .status-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
             margin-right: 0.5rem;
         }
 
-        .status-online {
-            background: var(--success);
+        .action-edit {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--color-info);
         }
 
-        .status-offline {
-            background: var(--text-gray);
+        .action-delete {
+            background: rgba(255, 8, 68, 0.2);
+            color: var(--accent-red);
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .sidebar {
-                width: 70px;
-            }
-
-            .main-content {
-                margin-left: 70px;
-            }
-
-            .sidebar-header,
-            .sidebar-footer {
-                padding: 1rem 0.5rem;
-            }
-
-            .logo-title,
-            .logo-subtitle,
-            .nav-label,
-            .user-details {
-                display: none;
-            }
-
-            .nav-item {
-                justify-content: center;
-                padding: 1rem;
-            }
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
+        .section-dash {
+            display: none;
+        }
 
-            .main-content {
-                margin-left: 0;
-                padding: 1.5rem;
-            }
+        .section-dash.active {
+            display: block;
+            animation: fadeIn 0.3s;
         }
     </style>
 </head>
-<body>
+<body style="display: flex;">
     <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">
-                <div class="logo-icon">🎮</div>
-                <div class="logo-title">TravL</div>
-            </div>
-            <div class="logo-subtitle">Admin Dashboard</div>
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo">TRAVL</div>
+            <div class="sidebar-subtitle">Admin Dashboard</div>
         </div>
 
         <nav class="sidebar-nav">
-            <a href="#" class="nav-item active" data-section="dashboard">
-                <span class="nav-icon">📊</span>
-                <span class="nav-label">Dashboard</span>
+            <a class="sidebar-item active" data-section="overview">
+                <span class="sidebar-icon">📊</span>
+                <span>Vue d'ensemble</span>
             </a>
-            <a href="#" class="nav-item" data-section="teams">
-                <span class="nav-icon">👥</span>
-                <span class="nav-label">Équipes</span>
+            <a class="sidebar-item" data-section="teams">
+                <span class="sidebar-icon">🏆</span>
+                <span>Équipes</span>
             </a>
-            <a href="#" class="nav-item" data-section="players">
-                <span class="nav-icon">🏆</span>
-                <span class="nav-label">Joueurs</span>
+            <a class="sidebar-item" data-section="players">
+                <span class="sidebar-icon">👤</span>
+                <span>Joueurs</span>
             </a>
-            <a href="#" class="nav-item" data-section="matches">
-                <span class="nav-icon">⚔️</span>
-                <span class="nav-label">Matchs</span>
+            <a class="sidebar-item" data-section="matches">
+                <span class="sidebar-icon">⚔️</span>
+                <span>Matchs</span>
             </a>
-            <a href="#" class="nav-item" data-section="tournaments">
-                <span class="nav-icon">🏅</span>
-                <span class="nav-label">Tournois</span>
+            <a class="sidebar-item" data-section="planning">
+                <span class="sidebar-icon">📅</span>
+                <span>Planning</span>
             </a>
-            <a href="#" class="nav-item" data-section="lan">
-                <span class="nav-icon">🎮</span>
-                <span class="nav-label">LAN Events</span>
+            <a class="sidebar-item" data-section="recruitment">
+                <span class="sidebar-icon">🎯</span>
+                <span>Recrutement</span>
             </a>
-            <a href="#" class="nav-item" data-section="budget">
-                <span class="nav-icon">💰</span>
-                <span class="nav-label">Budget</span>
+            <a class="sidebar-item" data-section="budget">
+                <span class="sidebar-icon">💰</span>
+                <span>Budget</span>
             </a>
-            <a href="#" class="nav-item" data-section="analytics">
-                <span class="nav-icon">📈</span>
-                <span class="nav-label">Analytics</span>
-            </a>
-            <a href="#" class="nav-item" data-section="news">
-                <span class="nav-icon">📰</span>
-                <span class="nav-label">News</span>
-            </a>
-            <a href="#" class="nav-item" data-section="sponsors">
-                <span class="nav-icon">🤝</span>
-                <span class="nav-label">Sponsors</span>
-            </a>
-            <a href="#" class="nav-item" data-section="settings">
-                <span class="nav-icon">⚙️</span>
-                <span class="nav-label">Paramètres</span>
+            <a class="sidebar-item" data-section="news">
+                <span class="sidebar-icon">📰</span>
+                <span>News</span>
             </a>
         </nav>
-
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">P</div>
-                <div class="user-details">
-                    <div class="user-name">Président</div>
-                    <div class="user-role">Admin</div>
-                </div>
-            </div>
-        </div>
-    </aside>
+    </div>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <!-- Dashboard Section -->
-        <div class="section-content active" id="dashboard">
-            <div class="top-bar">
-                <div class="page-title">
-                    <h1>Dashboard</h1>
-                    <p>Vue d'ensemble de l'organisation TravL E-sports</p>
+    <div class="main-dashboard">
+        <!-- OVERVIEW -->
+        <div class="section-dash active" id="overview">
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="section-title">Dashboard</h1>
+                    <p style="color: var(--text-tertiary); margin-top: 0.5rem;">Vue d'ensemble de l'organisation</p>
                 </div>
-                <div class="top-actions">
-                    <a href="index.html" class="btn btn-secondary">← Retour au site</a>
-                    <button class="btn btn-primary">+ Nouvelle action</button>
-                </div>
+                <a href="index.html" class="btn btn-ghost">← Site Public</a>
             </div>
 
-            <div class="dashboard-stats">
+            <div class="grid-4" style="margin-bottom: 2rem;">
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Équipes Actives</span>
-                        <div class="stat-icon">👥</div>
-                    </div>
-                    <div class="stat-value">8</div>
-                    <div class="stat-trend">
-                        <span>↗</span>
-                        <span>+2 ce mois</span>
-                    </div>
+                    <div class="stat-label">Équipes Actives</div>
+                    <div class="stat-value" id="dash-teams">0</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Joueurs Total</span>
-                        <div class="stat-icon">🏆</div>
-                    </div>
-                    <div class="stat-value">40</div>
-                    <div class="stat-trend">
-                        <span>↗</span>
-                        <span>+3 ce mois</span>
-                    </div>
+                    <div class="stat-label">Joueurs Total</div>
+                    <div class="stat-value" id="dash-players">0</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Matchs ce Mois</span>
-                        <div class="stat-icon">⚔️</div>
-                    </div>
-                    <div class="stat-value">24</div>
-                    <div class="stat-trend">
-                        <span>↗</span>
-                        <span>+18.2%</span>
-                    </div>
+                    <div class="stat-label">Winrate Global</div>
+                    <div class="stat-value" id="dash-winrate">0%</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Winrate Global</span>
-                        <div class="stat-icon">📊</div>
-                    </div>
-                    <div class="stat-value">58%</div>
-                    <div class="stat-trend trend-negative">
-                        <span>↘</span>
-                        <span>-2.1%</span>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Budget Mensuel</span>
-                        <div class="stat-icon">💰</div>
-                    </div>
-                    <div class="stat-value">58K€</div>
-                    <div class="stat-trend">
-                        <span>→</span>
-                        <span>Stable</span>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">LAN à Venir</span>
-                        <div class="stat-icon">🎮</div>
-                    </div>
-                    <div class="stat-value">3</div>
-                    <div class="stat-trend">
-                        <span>↗</span>
-                        <span>Ce trimestre</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Activité Récente</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Équipe</th>
-                            <th>Statut</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>09 Fév 2026</td>
-                            <td><span class="badge badge-success">Match</span></td>
-                            <td>Victoire vs Thunder GG (2-1)</td>
-                            <td>TravL Alpha</td>
-                            <td><span class="status-dot status-online"></span> Terminé</td>
-                        </tr>
-                        <tr>
-                            <td>08 Fév 2026</td>
-                            <td><span class="badge badge-info">Recrutement</span></td>
-                            <td>Nouveau joueur "Lightning" - Mid Lane</td>
-                            <td>TravL Epsilon</td>
-                            <td><span class="status-dot status-online"></span> Complété</td>
-                        </tr>
-                        <tr>
-                            <td>07 Fév 2026</td>
-                            <td><span class="badge badge-danger">Match</span></td>
-                            <td>Défaite vs Warriors X (1-2)</td>
-                            <td>TravL Beta</td>
-                            <td><span class="status-dot status-online"></span> Terminé</td>
-                        </tr>
-                        <tr>
-                            <td>05 Fév 2026</td>
-                            <td><span class="badge badge-warning">Inscription</span></td>
-                            <td>Championnat Européen 2026</td>
-                            <td>TravL Alpha</td>
-                            <td><span class="status-dot status-online"></span> Validé</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Performance des Équipes</h2>
-                </div>
-                <div class="chart-container">
-                    📊 Graphique - Performance par Équipe
+                    <div class="stat-label">Budget Mensuel</div>
+                    <div class="stat-value" id="dash-budget">0€</div>
                 </div>
             </div>
         </div>
 
-        <!-- Teams Section -->
-        <div class="section-content" id="teams">
-            <div class="top-bar">
-                <div class="page-title">
-                    <h1>Gestion des Équipes</h1>
-                    <p>Gérez vos 8 équipes League of Legends</p>
-                </div>
-                <div class="top-actions">
-                    <button class="btn btn-primary">+ Nouvelle Équipe</button>
-                </div>
+        <!-- TEAMS -->
+        <div class="section-dash" id="teams">
+            <div class="dashboard-header">
+                <h1 class="section-title">Gestion des Équipes</h1>
+                <button class="btn" onclick="addTeamForm()">+ Nouvelle Équipe</button>
             </div>
+            <table class="table" id="teams-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Division</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                        <th>Winrate</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Liste des Équipes</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Équipe</th>
-                            <th>Division</th>
-                            <th>Victoires</th>
-                            <th>Défaites</th>
-                            <th>Winrate</th>
-                            <th>Joueurs</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>TravL Alpha</strong></td>
-                            <td><span class="badge badge-success">Principale</span></td>
-                            <td>24</td>
-                            <td>8</td>
-                            <td>75%</td>
-                            <td>5</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>TravL Beta</strong></td>
-                            <td><span class="badge badge-info">Académie</span></td>
-                            <td>19</td>
-                            <td>12</td>
-                            <td>61%</td>
-                            <td>5</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>TravL Epsilon</strong></td>
-                            <td><span class="badge badge-warning">Talents</span></td>
-                            <td>21</td>
-                            <td>10</td>
-                            <td>68%</td>
-                            <td>5</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- PLAYERS -->
+        <div class="section-dash" id="players">
+            <div class="dashboard-header">
+                <h1 class="section-title">Gestion des Joueurs</h1>
+                <button class="btn" onclick="addPlayerForm()">+ Nouveau Joueur</button>
             </div>
+            <table class="table" id="players-table">
+                <thead>
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Équipe</th>
+                        <th>Position</th>
+                        <th>KDA</th>
+                        <th>Winrate</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Ajouter / Modifier Équipe</h2>
-                </div>
-                <form class="form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Nom de l'équipe</label>
-                        <input type="text" class="form-input" placeholder="TravL Alpha">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Division</label>
-                        <select class="form-select">
-                            <option>Principale</option>
-                            <option>Académie</option>
-                            <option>Espoirs</option>
-                            <option>Talents</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Icône (Lettre grecque)</label>
-                        <input type="text" class="form-input" placeholder="α">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Statut</label>
-                        <select class="form-select">
-                            <option>Active</option>
-                            <option>Inactive</option>
-                            <option>En Formation</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <button type="submit" class="btn btn-primary">Enregistrer l'équipe</button>
-                    </div>
-                </form>
+        <!-- MATCHES -->
+        <div class="section-dash" id="matches">
+            <div class="dashboard-header">
+                <h1 class="section-title">Matchs</h1>
+                <button class="btn" onclick="addMatchForm()">+ Nouveau Match</button>
+            </div>
+            <div class="empty-state">
+                <div class="empty-icon">⚔️</div>
+                <div class="empty-text">Gestion des matchs</div>
             </div>
         </div>
 
-        <!-- Players Section -->
-        <div class="section-content" id="players">
-            <div class="top-bar">
-                <div class="page-title">
-                    <h1>Gestion des Joueurs</h1>
-                    <p>Base de données des 40 joueurs</p>
-                </div>
-                <div class="top-actions">
-                    <button class="btn btn-primary">+ Nouveau Joueur</button>
-                </div>
+        <!-- PLANNING -->
+        <div class="section-dash" id="planning">
+            <div class="dashboard-header">
+                <h1 class="section-title">Planning</h1>
+                <button class="btn" onclick="addSessionForm()">+ Nouvelle Session</button>
             </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Liste des Joueurs</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Pseudo</th>
-                            <th>Équipe</th>
-                            <th>Position</th>
-                            <th>KDA</th>
-                            <th>Winrate</th>
-                            <th>Contrat</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>DragonSlayer</strong></td>
-                            <td>TravL Alpha</td>
-                            <td><span class="badge badge-info">TOP</span></td>
-                            <td>7.2</td>
-                            <td>72%</td>
-                            <td>Jusqu'à 2027</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>JungleKing</strong></td>
-                            <td>TravL Alpha</td>
-                            <td><span class="badge badge-success">JGL</span></td>
-                            <td>5.8</td>
-                            <td>68%</td>
-                            <td>Jusqu'à 2026</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>MidLane</strong></td>
-                            <td>TravL Alpha</td>
-                            <td><span class="badge badge-warning">MID</span></td>
-                            <td>8.5</td>
-                            <td>75%</td>
-                            <td>Jusqu'à 2028</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Ajouter / Modifier Joueur</h2>
-                </div>
-                <form class="form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Pseudo</label>
-                        <input type="text" class="form-input" placeholder="DragonSlayer">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nom Réel</label>
-                        <input type="text" class="form-input" placeholder="Jean Dupont">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Équipe</label>
-                        <select class="form-select">
-                            <option>TravL Alpha</option>
-                            <option>TravL Beta</option>
-                            <option>TravL Epsilon</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Position</label>
-                        <select class="form-select">
-                            <option>TOP</option>
-                            <option>JGL</option>
-                            <option>MID</option>
-                            <option>ADC</option>
-                            <option>SUP</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Âge</label>
-                        <input type="number" class="form-input" placeholder="22">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nationalité</label>
-                        <input type="text" class="form-input" placeholder="France">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Salaire Mensuel</label>
-                        <input type="text" class="form-input" placeholder="5000€">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Fin de Contrat</label>
-                        <input type="date" class="form-input">
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <button type="submit" class="btn btn-primary">Enregistrer le joueur</button>
-                    </div>
-                </form>
+            <div class="empty-state">
+                <div class="empty-icon">📅</div>
+                <div class="empty-text">Calendrier et sessions</div>
             </div>
         </div>
 
-        <!-- Budget Section -->
-        <div class="section-content" id="budget">
-            <div class="top-bar">
-                <div class="page-title">
-                    <h1>Gestion du Budget</h1>
-                    <p>Finances et dépenses de l'organisation</p>
-                </div>
-                <div class="top-actions">
-                    <button class="btn btn-primary">+ Nouvelle Transaction</button>
-                </div>
+        <!-- RECRUITMENT -->
+        <div class="section-dash" id="recruitment">
+            <div class="dashboard-header">
+                <h1 class="section-title">Recrutement</h1>
+                <a href="recruitment.html" class="btn btn-ghost" target="_blank">→ Page Publique</a>
             </div>
-
-            <div class="dashboard-stats">
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Budget Total 2026</span>
-                        <div class="stat-icon">💰</div>
-                    </div>
-                    <div class="stat-value">2.4M€</div>
-                    <div class="stat-trend">
-                        <span>↗</span>
-                        <span>+12% vs 2025</span>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Revenus Mensuels</span>
-                        <div class="stat-icon">📈</div>
-                    </div>
-                    <div class="stat-value">258K€</div>
-                    <div class="stat-trend">
-                        <span>↗</span>
-                        <span>+8.5%</span>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Dépenses Mensuelles</span>
-                        <div class="stat-icon">💸</div>
-                    </div>
-                    <div class="stat-value">200K€</div>
-                    <div class="stat-trend trend-negative">
-                        <span>↗</span>
-                        <span>+5.2%</span>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Bénéfice Net</span>
-                        <div class="stat-icon">✅</div>
-                    </div>
-                    <div class="stat-value">58K€</div>
-                    <div class="stat-trend">
-                        <span>↗</span>
-                        <span>+15.3%</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Répartition du Budget</h2>
-                </div>
-                <div class="chart-container">
-                    💰 Graphique - Dépenses par Catégorie
-                </div>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Transactions Récentes</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Catégorie</th>
-                            <th>Montant</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01 Fév 2026</td>
-                            <td><span class="badge badge-danger">Dépense</span></td>
-                            <td>Salaires Joueurs</td>
-                            <td>Personnel</td>
-                            <td style="color: var(--primary-red);">-100K€</td>
-                        </tr>
-                        <tr>
-                            <td>01 Fév 2026</td>
-                            <td><span class="badge badge-success">Revenu</span></td>
-                            <td>Sponsoring Red Bull</td>
-                            <td>Sponsors</td>
-                            <td style="color: var(--success);">+50K€</td>
-                        </tr>
-                        <tr>
-                            <td>28 Jan 2026</td>
-                            <td><span class="badge badge-success">Revenu</span></td>
-                            <td>Prize Money - Winter Championship</td>
-                            <td>Compétitions</td>
-                            <td style="color: var(--success);">+75K€</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="empty-state">
+                <div class="empty-icon">🎯</div>
+                <div class="empty-text">Candidatures et offres</div>
             </div>
         </div>
 
-        <!-- News Section -->
-        <div class="section-content" id="news">
-            <div class="top-bar">
-                <div class="page-title">
-                    <h1>Gestion des News</h1>
-                    <p>Publiez et gérez les actualités</p>
-                </div>
-                <div class="top-actions">
-                    <button class="btn btn-primary">+ Nouvelle News</button>
-                </div>
+        <!-- BUDGET -->
+        <div class="section-dash" id="budget">
+            <div class="dashboard-header">
+                <h1 class="section-title">Budget</h1>
             </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Articles Publiés</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Titre</th>
-                            <th>Catégorie</th>
-                            <th>Date</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>TravL Alpha qualifié pour les playoffs !</strong></td>
-                            <td><span class="badge badge-success">Victoire</span></td>
-                            <td>09 Fév 2026</td>
-                            <td><span class="status-dot status-online"></span> Publié</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>Nouveau joueur rejoint TravL Epsilon</strong></td>
-                            <td><span class="badge badge-info">Recrutement</span></td>
-                            <td>07 Fév 2026</td>
-                            <td><span class="status-dot status-online"></span> Publié</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Créer / Modifier Article</h2>
-                </div>
-                <form class="form-grid">
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <label class="form-label">Titre de l'article</label>
-                        <input type="text" class="form-input" placeholder="TravL Alpha qualifié pour les playoffs !">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Catégorie</label>
-                        <select class="form-select">
-                            <option>Victoire</option>
-                            <option>Recrutement</option>
-                            <option>Événement</option>
-                            <option>Tournoi</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Date de Publication</label>
-                        <input type="date" class="form-input">
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <label class="form-label">Extrait (description courte)</label>
-                        <textarea class="form-textarea" placeholder="Après une victoire décisive 2-1 contre Thunder GG..."></textarea>
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <label class="form-label">Contenu complet</label>
-                        <textarea class="form-textarea" style="min-height: 200px;" placeholder="Article complet..."></textarea>
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <button type="submit" class="btn btn-primary">Publier l'article</button>
-                    </div>
-                </form>
+            <div class="empty-state">
+                <div class="empty-icon">💰</div>
+                <div class="empty-text">Finances et transactions</div>
             </div>
         </div>
 
-        <!-- Sponsors Section -->
-        <div class="section-content" id="sponsors">
-            <div class="top-bar">
-                <div class="page-title">
-                    <h1>Gestion des Sponsors</h1>
-                    <p>Partenaires et sponsorships</p>
-                </div>
-                <div class="top-actions">
-                    <button class="btn btn-primary">+ Nouveau Sponsor</button>
-                </div>
+        <!-- NEWS -->
+        <div class="section-dash" id="news">
+            <div class="dashboard-header">
+                <h1 class="section-title">Actualités</h1>
+                <button class="btn" onclick="addNewsForm()">+ Nouvelle Actu</button>
             </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Liste des Sponsors</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Sponsor</th>
-                            <th>Type</th>
-                            <th>Montant Annuel</th>
-                            <th>Début</th>
-                            <th>Fin</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>RIOT GAMES</strong></td>
-                            <td><span class="badge badge-success">Partenaire Principal</span></td>
-                            <td>500K€</td>
-                            <td>Jan 2024</td>
-                            <td>Déc 2027</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>RAZER</strong></td>
-                            <td><span class="badge badge-info">Équipement</span></td>
-                            <td>200K€</td>
-                            <td>Mar 2025</td>
-                            <td>Mar 2028</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>RED BULL</strong></td>
-                            <td><span class="badge badge-warning">Boisson</span></td>
-                            <td>180K€</td>
-                            <td>Jan 2026</td>
-                            <td>Déc 2026</td>
-                            <td class="table-actions">
-                                <button class="action-btn action-edit">Modifier</button>
-                                <button class="action-btn action-delete">Supprimer</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Ajouter / Modifier Sponsor</h2>
-                </div>
-                <form class="form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Nom du Sponsor</label>
-                        <input type="text" class="form-input" placeholder="RIOT GAMES">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Type de Partenariat</label>
-                        <select class="form-select">
-                            <option>Partenaire Principal</option>
-                            <option>Équipement</option>
-                            <option>Boisson / Nourriture</option>
-                            <option>Technologie</option>
-                            <option>Média</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Montant Annuel</label>
-                        <input type="text" class="form-input" placeholder="500000€">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Date de Début</label>
-                        <input type="date" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Date de Fin</label>
-                        <input type="date" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Contact</label>
-                        <input type="email" class="form-input" placeholder="contact@sponsor.com">
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <button type="submit" class="btn btn-primary">Enregistrer le sponsor</button>
-                    </div>
-                </form>
+            <div class="empty-state">
+                <div class="empty-icon">📰</div>
+                <div class="empty-text">Gestion des actualités</div>
             </div>
         </div>
+    </div>
 
-        <!-- Settings Section -->
-        <div class="section-content" id="settings">
-            <div class="top-bar">
-                <div class="page-title">
-                    <h1>Paramètres</h1>
-                    <p>Configuration de la plateforme</p>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Informations de l'Organisation</h2>
-                </div>
-                <form class="form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Nom de l'organisation</label>
-                        <input type="text" class="form-input" value="TravL E-sports">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email de Contact</label>
-                        <input type="email" class="form-input" value="contact@travl-esports.fr">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Twitter / X</label>
-                        <input type="text" class="form-input" value="@TravLEsports">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Discord</label>
-                        <input type="text" class="form-input" value="TravL E-Sports">
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-textarea">Organisation professionnelle d'e-sports dédiée à l'excellence compétitive sur League of Legends.</textarea>
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
+    <script src="./data/database.js"></script>
     <script>
-        // Navigation entre sections
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
+        // Navigation
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const section = item.dataset.section;
                 
-                // Retirer la classe active de tous les liens
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
                 
-                // Ajouter la classe active au lien cliqué
-                this.classList.add('active');
+                document.querySelectorAll('.section-dash').forEach(s => s.classList.remove('active'));
+                document.getElementById(section).classList.add('active');
                 
-                // Masquer toutes les sections
-                document.querySelectorAll('.section-content').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Afficher la section correspondante
-                const sectionId = this.dataset.section;
-                document.getElementById(sectionId).classList.add('active');
+                loadDashSection(section);
             });
         });
+
+        // Load Section
+        function loadDashSection(section) {
+            switch(section) {
+                case 'overview':
+                    loadDashboardStats();
+                    break;
+                case 'teams':
+                    loadTeamsTable();
+                    break;
+                case 'players':
+                    loadPlayersTable();
+                    break;
+            }
+        }
+
+        // Load Dashboard Stats
+        function loadDashboardStats() {
+            if (!DATABASE || !DATABASE.teams) return;
+            
+            const teams = DATABASE.teams.length;
+            const players = DATABASE.players ? DATABASE.players.length : 0;
+            const totalWins = DATABASE.teams.reduce((sum, t) => sum + (t.wins || 0), 0);
+            const totalLosses = DATABASE.teams.reduce((sum, t) => sum + (t.losses || 0), 0);
+            const winrate = totalWins + totalLosses > 0 ? Math.round((totalWins / (totalWins + totalLosses)) * 100) : 0;
+
+            document.getElementById('dash-teams').textContent = teams;
+            document.getElementById('dash-players').textContent = players;
+            document.getElementById('dash-winrate').textContent = winrate + '%';
+            document.getElementById('dash-budget').textContent = '58K€';
+        }
+
+        // Load Teams Table
+        function loadTeamsTable() {
+            const tbody = document.querySelector('#teams-table tbody');
+            if (!DATABASE || !DATABASE.teams || DATABASE.teams.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Aucune équipe</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = DATABASE.teams.map(team => `
+                <tr>
+                    <td><strong>${team.name}</strong></td>
+                    <td><span class="badge badge-status">${team.division}</span></td>
+                    <td>${team.wins || 0}</td>
+                    <td>${team.losses || 0}</td>
+                    <td>${team.winrate || 0}%</td>
+                    <td>
+                        <button class="action-btn action-edit" onclick="editTeam(${team.id})">Modifier</button>
+                        <button class="action-btn action-delete" onclick="deleteTeam(${team.id})">Supprimer</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load Players Table
+        function loadPlayersTable() {
+            const tbody = document.querySelector('#players-table tbody');
+            if (!DATABASE || !DATABASE.players || DATABASE.players.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Aucun joueur</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = DATABASE.players.map(player => {
+                const team = getTeamById ? getTeamById(player.team) : null;
+                return `
+                    <tr>
+                        <td><strong>${player.pseudo}</strong></td>
+                        <td>${team ? team.name : 'N/A'}</td>
+                        <td><span class="badge badge-position">${player.position}</span></td>
+                        <td>${player.kda || 0}</td>
+                        <td>${player.winrate || 0}%</td>
+                        <td>
+                            <button class="action-btn action-edit" onclick="editPlayer(${player.id})">Modifier</button>
+                            <button class="action-btn action-delete" onclick="deletePlayer(${player.id})">Supprimer</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Actions
+        function addTeamForm() { alert('Formulaire ajout équipe - À implémenter'); }
+        function addPlayerForm() { alert('Formulaire ajout joueur - À implémenter'); }
+        function addMatchForm() { alert('Formulaire ajout match - À implémenter'); }
+        function addSessionForm() { alert('Formulaire ajout session - À implémenter'); }
+        function addNewsForm() { alert('Formulaire ajout news - À implémenter'); }
+        function editTeam(id) { alert(`Modifier équipe ${id}`); }
+        function deleteTeam(id) { if(confirm('Supprimer?')) alert(`Supprimer équipe ${id}`); }
+        function editPlayer(id) { alert(`Modifier joueur ${id}`); }
+        function deletePlayer(id) { if(confirm('Supprimer?')) alert(`Supprimer joueur ${id}`); }
+
+        // Initialize
+        loadDashboardStats();
     </script>
 </body>
 </html>
