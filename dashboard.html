@@ -5,8 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - TravL</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/dark-theme.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #0f0f0f;
+            --bg-hover: #151515;
+            --accent-red: #ff0844;
+            --accent-red-dark: #cc0036;
+            --accent-red-glow: rgba(255, 8, 68, 0.4);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-tertiary: #606060;
+            --border-primary: #1a1a1a;
+            --border-accent: #2a2a2a;
+            --color-success: #00ff88;
+            --color-info: #00d4ff;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+        }
+
+        /* Sidebar */
         .sidebar {
             position: fixed;
             left: 0;
@@ -17,6 +47,7 @@
             border-right: 1px solid var(--border-primary);
             padding: 2rem 0;
             overflow-y: auto;
+            z-index: 1000;
         }
 
         .sidebar-logo {
@@ -24,8 +55,14 @@
             border-bottom: 1px solid var(--border-primary);
         }
 
-        .sidebar-logo .logo {
+        .logo {
+            font-family: 'Teko', sans-serif;
             font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px var(--accent-red-glow);
             margin-bottom: 0.25rem;
         }
 
@@ -63,9 +100,11 @@
             font-size: 1.2rem;
         }
 
+        /* Main Dashboard */
         .main-dashboard {
             margin-left: 250px;
             padding: 2rem;
+            flex: 1;
         }
 
         .dashboard-header {
@@ -77,6 +116,88 @@
             border-bottom: 1px solid var(--border-primary);
         }
 
+        .section-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-dark));
+            border: none;
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px var(--accent-red-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid var(--border-accent);
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        /* Grid */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Stat Card */
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-left: 3px solid var(--accent-red);
+            border-radius: 6px;
+            padding: 1rem;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-left-width: 5px;
+            box-shadow: -4px 0 16px var(--accent-red-glow);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            line-height: 1;
+        }
+
+        /* Table */
         .table {
             width: 100%;
             background: var(--bg-card);
@@ -140,6 +261,27 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-position {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--color-info);
+            border: 1px solid var(--color-info);
+        }
+
+        .badge-status {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--color-success);
+            border: 1px solid var(--color-success);
+        }
+
         .section-dash {
             display: none;
         }
@@ -148,9 +290,52 @@
             display: block;
             animation: fadeIn 0.3s;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-tertiary);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.2;
+        }
+
+        .empty-text {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            .main-dashboard {
+                margin-left: 70px;
+            }
+            .sidebar-item span:not(.sidebar-icon) {
+                display: none;
+            }
+            .logo,
+            .sidebar-subtitle {
+                display: none;
+            }
+        }
     </style>
 </head>
-<body style="display: flex;">
+<body>
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-logo">
@@ -206,7 +391,7 @@
                 <a href="index.html" class="btn btn-ghost">← Site Public</a>
             </div>
 
-            <div class="grid-4" style="margin-bottom: 2rem;">
+            <div class="grid-4">
                 <div class="stat-card">
                     <div class="stat-label">Équipes Actives</div>
                     <div class="stat-value" id="dash-teams">0</div>
@@ -221,7 +406,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Budget Mensuel</div>
-                    <div class="stat-value" id="dash-budget">0€</div>
+                    <div class="stat-value">58K€</div>
                 </div>
             </div>
         </div>
@@ -330,60 +515,43 @@
 
     <script src="./data/database.js"></script>
     <script>
-        // Navigation
         document.querySelectorAll('.sidebar-item').forEach(item => {
             item.addEventListener('click', () => {
                 const section = item.dataset.section;
-                
                 document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
-                
                 document.querySelectorAll('.section-dash').forEach(s => s.classList.remove('active'));
                 document.getElementById(section).classList.add('active');
-                
                 loadDashSection(section);
             });
         });
 
-        // Load Section
         function loadDashSection(section) {
             switch(section) {
-                case 'overview':
-                    loadDashboardStats();
-                    break;
-                case 'teams':
-                    loadTeamsTable();
-                    break;
-                case 'players':
-                    loadPlayersTable();
-                    break;
+                case 'overview': loadDashboardStats(); break;
+                case 'teams': loadTeamsTable(); break;
+                case 'players': loadPlayersTable(); break;
             }
         }
 
-        // Load Dashboard Stats
         function loadDashboardStats() {
             if (!DATABASE || !DATABASE.teams) return;
-            
             const teams = DATABASE.teams.length;
             const players = DATABASE.players ? DATABASE.players.length : 0;
             const totalWins = DATABASE.teams.reduce((sum, t) => sum + (t.wins || 0), 0);
             const totalLosses = DATABASE.teams.reduce((sum, t) => sum + (t.losses || 0), 0);
             const winrate = totalWins + totalLosses > 0 ? Math.round((totalWins / (totalWins + totalLosses)) * 100) : 0;
-
             document.getElementById('dash-teams').textContent = teams;
             document.getElementById('dash-players').textContent = players;
             document.getElementById('dash-winrate').textContent = winrate + '%';
-            document.getElementById('dash-budget').textContent = '58K€';
         }
 
-        // Load Teams Table
         function loadTeamsTable() {
             const tbody = document.querySelector('#teams-table tbody');
             if (!DATABASE || !DATABASE.teams || DATABASE.teams.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Aucune équipe</td></tr>';
                 return;
             }
-
             tbody.innerHTML = DATABASE.teams.map(team => `
                 <tr>
                     <td><strong>${team.name}</strong></td>
@@ -399,14 +567,12 @@
             `).join('');
         }
 
-        // Load Players Table
         function loadPlayersTable() {
             const tbody = document.querySelector('#players-table tbody');
             if (!DATABASE || !DATABASE.players || DATABASE.players.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Aucun joueur</td></tr>';
                 return;
             }
-
             tbody.innerHTML = DATABASE.players.map(player => {
                 const team = getTeamById ? getTeamById(player.team) : null;
                 return `
@@ -425,18 +591,16 @@
             }).join('');
         }
 
-        // Actions
-        function addTeamForm() { alert('Formulaire ajout équipe - À implémenter'); }
-        function addPlayerForm() { alert('Formulaire ajout joueur - À implémenter'); }
-        function addMatchForm() { alert('Formulaire ajout match - À implémenter'); }
-        function addSessionForm() { alert('Formulaire ajout session - À implémenter'); }
-        function addNewsForm() { alert('Formulaire ajout news - À implémenter'); }
+        function addTeamForm() { alert('Formulaire ajout équipe'); }
+        function addPlayerForm() { alert('Formulaire ajout joueur'); }
+        function addMatchForm() { alert('Formulaire ajout match'); }
+        function addSessionForm() { alert('Formulaire ajout session'); }
+        function addNewsForm() { alert('Formulaire ajout news'); }
         function editTeam(id) { alert(`Modifier équipe ${id}`); }
         function deleteTeam(id) { if(confirm('Supprimer?')) alert(`Supprimer équipe ${id}`); }
         function editPlayer(id) { alert(`Modifier joueur ${id}`); }
         function deletePlayer(id) { if(confirm('Supprimer?')) alert(`Supprimer joueur ${id}`); }
 
-        // Initialize
         loadDashboardStats();
     </script>
 </body>
