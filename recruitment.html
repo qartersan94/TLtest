@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutement - TravL E-sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/modals.css">
+    <link rel="stylesheet" href="./css/contrast.css">
+    <style>
+        .recruitment-hero {
+            text-align: center;
+            padding: 6rem 3rem 4rem;
+            background: linear-gradient(180deg, rgba(211, 16, 39, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .recruitment-hero h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .recruitment-hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .recruitment-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
+            border-color: var(--primary-red);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary-red);
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem 4rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .recruiting-teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .recruiting-card {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(139, 0, 0, 0.15));
+            border: 2px solid var(--primary-red);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .recruiting-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(211, 16, 39, 0.4);
+        }
+
+        .recruiting-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(211, 16, 39, 0.3);
+        }
+
+        .team-icon-recruiting {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .recruiting-header h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+            color: var(--text-light);
+        }
+
+        .recruiting-info {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+        }
+
+        .info-label {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: var(--text-light);
+        }
+
+        .availability-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .day-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(211, 16, 39, 0.2);
+            border: 1px solid var(--primary-red);
+            border-radius: 20px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .apply-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(211, 16, 39, 0.5);
+        }
+
+        .application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(139, 0, 0, 0.15));
+            border: 1px solid rgba(211, 16, 39, 0.3);
+            border-radius: 15px;
+            padding: 3rem;
+        }
+
+        .form-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-top: 0.3rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--deep-red));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(211, 16, 39, 0.6);
+        }
+    </style>
+</head>
+<body style="display: block;">
+    <header>
+        <nav style="max-width: 100%; padding: 0 3rem;">
+            <div class="logo-container">
+                <div class="logo-icon">🎮</div>
+                <div class="logo-title">TravL E-sports</div>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <a href="index.html" class="btn btn-secondary">← Accueil</a>
+                <a href="dashboard-full.html" class="btn btn-primary">Dashboard Admin</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="recruitment-hero">
+        <h1>Rejoignez TravL E-sports</h1>
+        <p>Nous recherchons les meilleurs joueurs pour renforcer nos équipes compétitives. Postulez maintenant et rejoignez une organisation professionnelle !</p>
+    </div>
+
+    <div class="recruitment-tabs">
+        <button class="tab-btn active" onclick="switchTab('offers')">📋 Offres de Recrutement</button>
+        <button class="tab-btn" onclick="switchTab('apply')">✍️ Postuler</button>
+    </div>
+
+    <!-- TAB 1: Offres -->
+    <div class="tab-content active" id="offers">
+        <div class="recruiting-teams-grid" id="recruiting-grid"></div>
+    </div>
+
+    <!-- TAB 2: Formulaire -->
+    <div class="tab-content" id="apply">
+        <div class="application-form">
+            <h2 class="form-title">Formulaire de Candidature</h2>
+            <form id="application-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Pseudo In-Game *</label>
+                        <input type="text" class="form-input" name="pseudo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Âge *</label>
+                        <input type="number" class="form-input" name="age" min="13" max="30" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Discord *</label>
+                        <input type="text" class="form-input" name="discord" placeholder="Username#1234" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Position Principale *</label>
+                        <select class="form-select" name="position" required>
+                            <option value="">Sélectionner...</option>
+                            <option value="TOP">Top</option>
+                            <option value="JGL">Jungle</option>
+                            <option value="MID">Mid</option>
+                            <option value="ADC">ADC</option>
+                            <option value="SUP">Support</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Rang Solo/Duo Actuel *</label>
+                        <select class="form-select" name="currentRank" required id="current-rank"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Meilleur Rang Atteint *</label>
+                        <select class="form-select" name="peakRank" required id="peak-rank"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Équipe Souhaitée</label>
+                        <select class="form-select" name="appliedTeam" id="team-select"></select>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Disponibilités (jours de la semaine) *</label>
+                        <div class="checkbox-group" id="availability-checkboxes"></div>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Champions Maîtrisés (3 minimum) *</label>
+                        <input type="text" class="form-input" name="champions" placeholder="Ex: Darius, Garen, Sett" required>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Expérience Compétitive</label>
+                        <textarea class="form-textarea" name="experience" rows="3" placeholder="Décrivez votre expérience en compétition (tournois, ligues, équipes précédentes...)"></textarea>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Motivation (max 500 caractères) *</label>
+                        <textarea class="form-textarea" name="motivation" rows="4" maxlength="500" required id="motivation-text"></textarea>
+                        <div class="char-count"><span id="char-count">0</span>/500</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Envoyer ma Candidature</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./data/database.js"></script>
+    <script src="./js/modals.js"></script>
+    <script>
+        // Switch tabs
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab).classList.add('active');
+        }
+
+        // Load recruiting teams
+        function loadRecruitingTeams() {
+            const grid = document.getElementById('recruiting-grid');
+            const recruitingTeams = getRecruitingTeams();
+
+            if (recruitingTeams.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; color: var(--text-gray); font-size: 1.2rem;">Aucune offre de recrutement pour le moment.</p>';
+                return;
+            }
+
+            grid.innerHTML = recruitingTeams.map(team => `
+                <div class="recruiting-card">
+                    <div class="recruiting-header">
+                        <div class="team-icon-recruiting">${team.icon}</div>
+                        <div>
+                            <h3>${team.name}</h3>
+                            <span class="badge badge-${getDivisionBadge(team.division)}">${team.division}</span>
+                        </div>
+                    </div>
+
+                    <div class="recruiting-info">
+                        <div class="info-row">
+                            <span class="info-label">Position Recherchée</span>
+                            <span class="info-value"><strong>${team.recruiting.position}</strong></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Rang Minimum</span>
+                            <span class="info-value">${team.recruiting.minRank}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Âge Minimum</span>
+                            <span class="info-value">${team.recruiting.minAge} ans</span>
+                        </div>
+                        <div class="info-row" style="flex-direction: column; gap: 0.5rem;">
+                            <span class="info-label">Disponibilités Requises</span>
+                            <div class="availability-tags">
+                                ${team.recruiting.availability.map(day => `<span class="day-tag">${day}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="apply-btn" onclick="applyToTeam(${team.id})">Postuler à cette équipe</button>
+                </div>
+            `).join('');
+        }
+
+        function getDivisionBadge(division) {
+            const map = {
+                'Principale': 'success',
+                'Académie': 'info',
+                'Espoirs': 'warning',
+                'Talents': 'warning',
+                'Challenger': 'info',
+                'Développement': 'secondary',
+                'Formation': 'secondary',
+                'Réserve': 'info'
+            };
+            return map[division] || 'info';
+        }
+
+        function applyToTeam(teamId) {
+            switchTab('apply');
+            document.querySelector('[name="appliedTeam"]').value = teamId;
+            document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+            document.querySelector('.tab-btn:nth-child(1)').classList.remove('active');
+        }
+
+        // Populate form
+        function populateForm() {
+            // Ranks
+            const currentRankSelect = document.getElementById('current-rank');
+            const peakRankSelect = document.getElementById('peak-rank');
+            
+            DATABASE.ranks.forEach(rank => {
+                const option1 = document.createElement('option');
+                option1.value = rank.name;
+                option1.textContent = rank.name;
+                currentRankSelect.appendChild(option1);
+
+                const option2 = document.createElement('option');
+                option2.value = rank.name;
+                option2.textContent = rank.name;
+                peakRankSelect.appendChild(option2);
+            });
+
+            // Teams
+            const teamSelect = document.getElementById('team-select');
+            const allOption = document.createElement('option');
+            allOption.value = '';
+            allOption.textContent = 'Toutes les équipes';
+            teamSelect.appendChild(allOption);
+
+            DATABASE.teams.forEach(team => {
+                const option = document.createElement('option');
+                option.value = team.id;
+                option.textContent = team.name;
+                teamSelect.appendChild(option);
+            });
+
+            // Days
+            const availabilityDiv = document.getElementById('availability-checkboxes');
+            DATABASE.daysOfWeek.forEach(day => {
+                const label = document.createElement('label');
+                label.className = 'checkbox-label';
+                label.innerHTML = `
+                    <input type="checkbox" name="availability[]" value="${day}">
+                    <span>${day}</span>
+                `;
+                availabilityDiv.appendChild(label);
+            });
+        }
+
+        // Character counter
+        document.addEventListener('DOMContentLoaded', () => {
+            const textarea = document.getElementById('motivation-text');
+            const counter = document.getElementById('char-count');
+
+            textarea.addEventListener('input', () => {
+                counter.textContent = textarea.value.length;
+            });
+        });
+
+        // Form submission
+        document.getElementById('application-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {};
+            
+            formData.forEach((value, key) => {
+                if (key === 'availability[]') {
+                    if (!data.availability) data.availability = [];
+                    data.availability.push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            // Validation
+            if (!data.availability || data.availability.length < 2) {
+                alert('Veuillez sélectionner au moins 2 jours de disponibilité.');
+                return;
+            }
+
+            // Add to database (simulation)
+            const application = {
+                id: DATABASE.applications.length + 1,
+                ...data,
+                status: 'pending',
+                createdAt: new Date().toISOString().split('T')[0]
+            };
+
+            DATABASE.applications.push(application);
+
+            // Success
+            if (typeof modals !== 'undefined') {
+                modals.showSuccess('Candidature envoyée avec succès ! Nous vous contacterons prochainement.');
+            } else {
+                alert('Candidature envoyée avec succès !');
+            }
+
+            // Reset form
+            e.target.reset();
+            document.getElementById('char-count').textContent = '0';
+
+            // Go back to offers
+            setTimeout(() => {
+                switchTab('offers');
+                document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+                document.querySelector('.tab-btn:nth-child(2)').classList.remove('active');
+            }, 2000);
+        });
+
+        // Initialize
+        loadRecruitingTeams();
+        populateForm();
+    </script>
+</body>
+</html>
